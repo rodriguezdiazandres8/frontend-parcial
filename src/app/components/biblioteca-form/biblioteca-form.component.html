@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="registrar()">
+  <div class="campo">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" formControlName="nombre" maxlength="150" required
+      autocomplete="organization" [readOnly]="guardando()"
+      [attr.aria-invalid]="invalido('nombre')" aria-describedby="error-nombre">
+    @if (invalido('nombre')) {
+      <small class="error-campo" id="error-nombre">Escribe un nombre de hasta 150 caracteres.</small>
+    }
+  </div>
+
+  <div class="campo">
+    <label for="direccion">Dirección</label>
+    <input id="direccion" type="text" formControlName="direccion" maxlength="200" required
+      autocomplete="street-address" [readOnly]="guardando()"
+      [attr.aria-invalid]="invalido('direccion')" aria-describedby="error-direccion">
+    @if (invalido('direccion')) {
+      <small class="error-campo" id="error-direccion">Escribe una dirección de hasta 200 caracteres.</small>
+    }
+  </div>
+
+  <div class="campo">
+    <label for="ciudad">Ciudad</label>
+    <input id="ciudad" type="text" formControlName="ciudad" maxlength="100" required
+      autocomplete="address-level2" [readOnly]="guardando()"
+      [attr.aria-invalid]="invalido('ciudad')" aria-describedby="error-ciudad">
+    @if (invalido('ciudad')) {
+      <small class="error-campo" id="error-ciudad">Escribe una ciudad de hasta 100 caracteres.</small>
+    }
+  </div>
+
+  <button type="submit" [disabled]="guardando()">
+    {{ guardando() ? 'Guardando…' : 'Registrar biblioteca' }}
+  </button>
+  @if (error()) {
+    <p class="aviso error" role="alert">{{ error() }}</p>
+  }
+  @if (exito()) {
+    <p class="aviso exito" role="status">{{ exito() }}</p>
+  }
+</form>

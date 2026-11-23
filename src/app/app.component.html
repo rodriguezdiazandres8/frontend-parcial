@@ -1,0 +1,30 @@
+<header class="cabecera">
+  <div class="contenedor">
+    <p class="etiqueta">Red de bibliotecas</p>
+    <h1>Bibliotecas y libros</h1>
+    <p>Registra una biblioteca y consulta los libros disponibles en cada sede.</p>
+  </div>
+</header>
+
+<main class="contenedor distribucion">
+  <section class="panel" aria-labelledby="titulo-registro">
+    <h2 id="titulo-registro">Registrar biblioteca</h2>
+    <p class="descripcion">Todos los campos son obligatorios.</p>
+    <app-biblioteca-form (bibliotecaRegistrada)="cargarBibliotecas()" />
+  </section>
+
+  <section class="panel catalogo" aria-labelledby="titulo-libros" [attr.aria-busy]="cargando()">
+    <h2 id="titulo-libros">Libros disponibles</h2>
+    <p class="descripcion">Consulta el título, el autor y la biblioteca de cada libro.</p>
+    @if (cargando()) {
+      <p class="estado" role="status">Cargando libros…</p>
+    } @else if (error()) {
+      <div class="aviso error" role="alert">
+        <p>{{ error() }}</p>
+        <button type="button" class="boton-secundario" (click)="cargarBibliotecas()">Reintentar</button>
+      </div>
+    } @else {
+      <app-libros-tabla [bibliotecas]="bibliotecas()" />
+    }
+  </section>
+</main>

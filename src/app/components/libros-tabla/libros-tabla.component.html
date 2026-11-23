@@ -1,0 +1,25 @@
+<div class="tabla-contenedor">
+  <table>
+    <caption class="solo-lectores">Libros existentes y su biblioteca correspondiente</caption>
+    <thead>
+      <tr>
+        <th scope="col">Título</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Año</th>
+        <th scope="col">Biblioteca</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (libro of libros(); track libro.id) {
+        <tr>
+          <td class="titulo-libro">{{ libro.titulo }}</td>
+          <td>{{ libro.autor }}</td>
+          <td class="anio">{{ libro.anio_publicacion }}</td>
+          <td>{{ libro.biblioteca }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="4" class="estado">No hay libros registrados.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
